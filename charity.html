@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charity Donations - NeighborShare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .dropdown:hover .dropdown-menu { display: block; }
+    </style>
+</head>
+<body id="page-charity" class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-800">NeighborShare</a>
+            <div class="hidden md:flex items-center space-x-2" id="main-nav">
+                <!-- Nav links will be inserted here by JS -->
+            </div>
+            <div id="nav-auth-section" class="hidden md:flex items-center space-x-4"></div>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
+        <!-- Call to Action Section -->
+        <section class="mb-12 bg-purple-100 border-l-4 border-purple-500 rounded-r-lg p-8">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-2/3 mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold text-purple-800 mb-2">Share Your Generosity</h2>
+                    <p class="text-purple-700">Your unused items can make a world of difference to someone in your community. Donate today and help build a stronger, more supportive neighborhood.</p>
+                </div>
+                <a href="donate.html" class="bg-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors whitespace-nowrap">Donate an Item</a>
+            </div>
+        </section>
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-8">Items for Donation</h1>
+        <p class="text-lg text-gray-600 mb-10 max-w-3xl">These items have been generously donated by your neighbors. Feel free to claim them if you are in need.</p>
+
+        <!-- All donation items will be displayed in this grid -->
+        <div id="charity-items-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+            <!-- Items will be dynamically inserted here by app.js -->
+        </div>
+    </main>
+    
+    <script src="app.js"></script>
+</body>
+</html>

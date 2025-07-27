@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lend an Item - NeighborShare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style> body { font-family: 'Inter', sans-serif; } .dropdown:hover .dropdown-menu { display: block; } </style>
+</head>
+<body id="page-lend" class="bg-gray-50">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-800">NeighborShare</a>
+            <div id="main-nav" class="hidden md:flex items-center space-x-2"></div>
+            <div id="nav-auth-section" class="hidden md:flex items-center space-x-4"></div>
+        </nav>
+    </header>
+    <main class="container mx-auto px-6 py-12">
+        <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Lend an Item to the Community</h1>
+            <p class="text-gray-600 mb-8">List an item in the sharing pool. You can offer it for free or set a small rental fee.</p>
+            
+            <!-- Success Message -->
+            <div id="form-success-message" class="hidden bg-blue-100 border-l-4 border-blue-500 text-blue-700 p-4 mb-6" role="alert">
+                <p class="font-bold">Success!</p>
+                <p>Your item has been listed for lending.</p>
+                <div class="mt-2">
+                    <button id="add-another-btn" class="text-sm font-semibold text-blue-800 hover:underline">Add another item</button>
+                    <span class="mx-2 text-blue-600">|</span>
+                    <a href="dashboard.html" class="text-sm font-semibold text-blue-800 hover:underline">View your dashboard</a>
+                </div>
+            </div>
+            
+            <!-- This form's data-type attribute is crucial for the JS logic -->
+            <form data-type="lend">
+                <div class="mb-4">
+                    <label for="item-name" class="block text-gray-700 font-semibold mb-2">Item Name</label>
+                    <input type="text" id="item-name" name="itemName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., Ladder, Power Drill, Board Game" required>
+                </div>
+                
+                <!-- NEW: Optional Price Fields -->
+                <div class="mb-4">
+                    <label for="item-price" class="block text-gray-700 font-semibold mb-2">Rental Price (₹) <span class="text-sm font-normal text-gray-500">(Optional)</span></label>
+                    <div class="flex items-center space-x-2">
+                        <input type="number" id="item-price" name="itemPrice" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 50" min="0">
+                        <select name="itemPriceUnit" class="w-auto px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50">
+                            <option value="per day">per day</option>
+                            <option value="per week">per week</option>
+                            <option value="per hour">per hour</option>
+                        </select>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">Leave the price blank or at 0 to lend it for free.</p>
+                </div>
+
+                <div class="mb-4">
+                    <label for="item-description" class="block text-gray-700 font-semibold mb-2">Description</label>
+                    <textarea id="item-description" name="itemDescription" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., Available on weekends, please return clean." required></textarea>
+                </div>
+
+                <div class="mb-6">
+                    <label for="item-image" class="block text-gray-700 font-semibold mb-2">Upload Image</label>
+                    <input type="file" id="item-image" name="itemImage" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" accept="image/png, image/jpeg, image/jpg">
+                    <img id="image-preview" class="hidden mt-4 rounded-lg max-h-40" alt="Image preview">
+                </div>
+
+                <div class="text-right">
+                    <button type="submit" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">List Item to Lend</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>

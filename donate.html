@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate an Item - NeighborShare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .dropdown:hover .dropdown-menu { display: block; }
+    </style>
+</head>
+<body id="page-donate" class="bg-gray-50">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-800">NeighborShare</a>
+            <div class="hidden md:flex items-center space-x-2" id="main-nav">
+                <!-- Nav links will be inserted here by JS -->
+            </div>
+            <div id="nav-auth-section" class="hidden md:flex items-center space-x-4"></div>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden"></div>
+    </header>
+
+    <!-- Main Content: The Form -->
+    <main class="container mx-auto px-6 py-12">
+        <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-md">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Donate an Item</h1>
+            <p class="text-gray-600 mb-8">List an item you'd like to give away to a neighbor in need. Your generosity helps build a stronger community.</p>
+            
+            <div id="form-success-message" class="hidden bg-purple-100 border-l-4 border-purple-500 text-purple-700 p-4 mb-6" role="alert">
+                <p class="font-bold">Thank you!</p>
+                <p>Your item has been listed for donation.</p>
+                <div class="mt-2">
+                    <button id="add-another-btn" class="text-sm font-semibold text-purple-800 hover:underline">Donate another item</button>
+                    <span class="mx-2 text-purple-600">|</span>
+                    <a href="dashboard.html" class="text-sm font-semibold text-purple-800 hover:underline">View your dashboard</a>
+                </div>
+            </div>
+
+            <form data-type="donation">
+                <div class="mb-4">
+                    <label for="item-name" class="block text-gray-700 font-semibold mb-2">Item Name</label>
+                    <input type="text" id="item-name" name="itemName" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., Old Clothes, Books, Kitchen Utensils" required>
+                </div>
+
+                <div class="mb-4">
+                    <label for="item-description" class="block text-gray-700 font-semibold mb-2">Description</label>
+                    <textarea id="item-description" name="itemDescription" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., 'Gently used winter clothes', 'Box of assorted children's books'." required></textarea>
+                </div>
+
+                <div class="mb-6">
+                    <label for="item-image" class="block text-gray-700 font-semibold mb-2">Upload Image (Optional)</label>
+                    <input type="file" id="item-image" name="itemImage" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-purple-50 file:text-purple-700 hover:file:bg-purple-100" accept="image/png, image/jpeg, image/jpg">
+                    <img id="image-preview" class="hidden mt-4 rounded-lg max-h-40" alt="Image preview">
+                </div>
+
+                <div class="text-right">
+                    <button type="submit" class="bg-purple-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors">List for Donation</button>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <script src="app.js"></script>
+</body>
+</html>

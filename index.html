@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeighborShare - Community Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        /* Styles for the horizontal carousel */
+        .carousel-container {
+            position: relative;
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* For Firefox */
+            -ms-overflow-style: none;  /* For Internet Explorer and Edge */
+            cursor: pointer; /* Changed to pointer as requested */
+        }
+        .carousel::-webkit-scrollbar {
+            display: none; /* For Chrome, Safari, and Opera */
+        }
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 280px; /* Card width */
+            margin-right: 1.5rem; /* 24px */
+        }
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .carousel-container:hover .scroll-btn {
+            opacity: 1;
+        }
+        .scroll-btn.left {
+            left: -20px;
+        }
+        .scroll-btn.right {
+            right: -20px;
+        }
+    </style>
+</head>
+<body id="page-index" class="bg-gray-50">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-800">NeighborShare</a>
+            <!-- Main navigation links will be dynamically inserted here -->
+            <div id="main-nav" class="hidden md:flex items-center space-x-2"></div>
+            <!-- Auth buttons will be dynamically inserted here -->
+            <div id="nav-auth-section" class="hidden md:flex items-center space-x-4"></div>
+            <button class="md:hidden text-gray-700">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12 overflow-hidden">
+        <!-- Hero Section -->
+        <section class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">The Community Hub</h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">Buy, sell, borrow, and lend with your neighbors. Reduce waste, save money, and build a stronger community.</p>
+            <div class="mt-8">
+                <input type="text" id="search-input" placeholder="Search for items or requests..." class="w-full max-w-lg px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+        </section>
+
+        <!-- Dynamic Content Sections -->
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">For Sale</h2>
+                <a href="buy.html" class="text-blue-600 font-semibold hover:underline">View More &rarr;</a>
+            </div>
+            <div class="carousel-container">
+                <div id="for-sale-container" class="carousel"></div>
+                <button class="scroll-btn left" data-carousel="for-sale-container">&#8249;</button>
+                <button class="scroll-btn right" data-carousel="for-sale-container">&#8250;</button>
+            </div>
+        </section>
+        
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">Available to Borrow</h2>
+                 <a href="borrow.html" class="text-blue-600 font-semibold hover:underline">View More &rarr;</a>
+            </div>
+            <div class="carousel-container">
+                <div id="to-lend-container" class="carousel"></div>
+                <button class="scroll-btn left" data-carousel="to-lend-container">&#8249;</button>
+                <button class="scroll-btn right" data-carousel="to-lend-container">&#8250;</button>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">Community Requests</h2>
+                <a href="request.html" class="text-blue-600 font-semibold hover:underline">View More &rarr;</a>
+            </div>
+            <div class="carousel-container">
+                <div id="request-container" class="carousel"></div>
+                <button class="scroll-btn left" data-carousel="request-container">&#8249;</button>
+                <button class="scroll-btn right" data-carousel="request-container">&#8250;</button>
+            </div>
+        </section>
+
+        <!-- NEW: Charity Section -->
+        <section>
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800">For Donation</h2>
+                <a href="charity.html" class="text-blue-600 font-semibold hover:underline">View More &rarr;</a>
+            </div>
+            <div class="carousel-container">
+                <div id="donation-container" class="carousel"></div>
+                <button class="scroll-btn left" data-carousel="donation-container">&#8249;</button>
+                <button class="scroll-btn right" data-carousel="donation-container">&#8250;</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-16 border-t"><div class="container mx-auto px-6 py-8 text-center text-gray-600"><p>&copy; 2025 NeighborShare. A Community Project.</p></div></footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+        <div class="modal-backdrop fixed inset-0 bg-black opacity-50"></div>
+        <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md mx-auto relative z-10">
+            <h2 class="text-2xl font-bold mb-4">Login or Sign Up</h2>
+            <p class="text-gray-600 mb-6">Enter a username to personalize your experience.</p>
+            <form id="modal-user-form">
+                <input type="text" id="modal-username-input" placeholder="Enter your name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <div class="mt-6 flex justify-end space-x-4">
+                    <button type="button" id="modal-close-btn" class="px-4 py-2 rounded-lg text-gray-600 bg-gray-100 hover:bg-gray-200">Cancel</button>
+                    <button type="submit" class="px-4 py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
