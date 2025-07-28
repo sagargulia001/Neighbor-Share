@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
     // --- CONSTANTS & GLOBAL STATE ---
-    const DATA_VERSION = '1.5'; // Version for dark mode and mobile nav
+    const DATA_VERSION = '1.6'; // Bump version to force data re-seed
     const scrollAnimationState = {};
     const restartTimers = {};
 
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return `<div class="${cardClassBase}">${cardContent}</div>`;
         } else {
             const linkClass = cardClassBase + ' block hover:shadow-lg hover:-translate-y-1 transition-all duration-200';
-            return `<a href="item-detail.html?id=${request.id}&type=request" class="${linkClass}">${cardContent}</a>`;
+            return `<a href="post-item.html" class="${linkClass}">${cardContent}</a>`;
         }
     };
 
@@ -450,7 +450,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const renderDetailPage = () => {
         const params = new URLSearchParams(window.location.search);
         const itemId = parseInt(params.get('id'));
-        const itemType = params.get('type'); // 'request' or null for listings
 
         const detailContainer = document.getElementById('item-detail-container');
         if (!detailContainer) return;
@@ -460,13 +459,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        let item;
-        if (itemType === 'request') {
-            item = getRequests().find(r => r.id === itemId);
-            if (item) item.item_type = 'request'; // Add a temporary type for logic
-        } else {
-            item = getListings().find(l => l.id === itemId);
-        }
+        const item = getListings().find(l => l.id === itemId);
 
         if (!item) {
             detailContainer.innerHTML = '<p class="text-center text-red-500 font-semibold">Error: Item not found.</p>';
@@ -489,13 +482,8 @@ document.addEventListener('DOMContentLoaded', async () => {
             tagText = 'DONATION'; tagColor = 'bg-purple-100 text-purple-800';
             priceOrStatus = '<span class="text-2xl font-bold text-purple-800">Free to Claim</span>';
             actionText = 'Claim Item'; actionColor = 'bg-purple-600 hover:bg-purple-700';
-        } else if (item.item_type === 'request') {
-            tagText = 'REQUEST'; tagColor = 'bg-yellow-100 text-yellow-800';
-            priceOrStatus = '<span class="text-2xl font-bold text-yellow-800">Community Request</span>';
-            actionText = 'I Can Help!'; actionColor = 'bg-yellow-500 hover:bg-yellow-600';
         }
-
-        ownerText = item.item_type === 'request' ? 'Requested by' : 'Listed by';
+        ownerText = 'Listed by';
 
         const detailHTML = `
             <div class="grid md:grid-cols-2 gap-x-12 gap-y-8">
@@ -711,6 +699,30 @@ document.addEventListener('DOMContentLoaded', async () => {
         renderView(); // Initial render
     };
 
+    const injectLoginModal = () => {
+        if (document.getElementById('login-modal')) return;
+        const modalHTML = `
+        <div id="login-modal" class="fixed inset-0 z-50 items-center justify-center hidden">
+            <div class="modal-backdrop fixed inset-0 bg-black opacity-50"></div>
+            <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md mx-auto relative z-10">
+                <h2 class="text-2xl font-bold mb-4">Login or Sign Up</h2>
+                <p class="text-gray-600 mb-6">Enter a username to personalize your experience.</p>
+                <form id="modal-user-form">
+                    <input type="text" id="modal-username-input" placeholder="Enter your name"
+                        class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required>
+                    <div class="mt-6 flex justify-end space-x-4">
+                        <button type="button" id="modal-close-btn"
+                            class="px-4 py-2 rounded-lg text-gray-600 bg-gray-100 hover:bg-gray-200">Cancel</button>
+                        <button type="submit"
+                            class="px-4 py-2 rounded-lg text-white bg-blue-600 hover:bg-blue-700">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>`;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+    };
+
     const loadHeader = async () => {
         const placeholder = document.getElementById('header-placeholder');
         if (!placeholder) return;
@@ -728,6 +740,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- INITIALIZATION ---
     await loadHeader(); // Load the header first
+    injectLoginModal(); // Inject the modal so it's available on all pages
     await seedDemoData();
     buildNav(); // Now these functions can find the nav elements
     updateUserNav();
