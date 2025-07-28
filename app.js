@@ -738,8 +738,29 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     };
 
+    const loadFooter = async () => {
+    const placeholder = document.getElementById('footer-placeholder');
+    if (!placeholder) return; // Exit if no placeholder on the page
+    try {
+        const response = await fetch('_footer.html'); // Assuming you name it _footer.html
+        if (!response.ok) {
+            throw new Error(`Failed to fetch footer: ${response.statusText}`);
+        }
+        const footerHTML = await response.text();
+        // Use outerHTML to replace the placeholder div itself
+        placeholder.outerHTML = footerHTML;
+    } catch (error) {
+        console.error("Error loading footer:", error);
+        placeholder.innerHTML = '<p class="text-center text-red-500 p-4">Error: Could not load page footer.</p>';
+    }
+};
+    
+
     // --- INITIALIZATION ---
-    await loadHeader(); // Load the header first
+    await Promise.all([
+    loadHeader(),
+    loadFooter()
+])
     injectLoginModal(); // Inject the modal so it's available on all pages
     await seedDemoData();
     buildNav(); // Now these functions can find the nav elements
