@@ -14,20 +14,7 @@
 <body id="page-charity" class="bg-gray-50">
 
     <!-- Header -->
-    <header class="bg-white shadow-sm sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-bold text-gray-800">NeighborShare</a>
-            <div class="hidden md:flex items-center space-x-2" id="main-nav">
-                <!-- Nav links will be inserted here by JS -->
-            </div>
-            <div id="nav-auth-section" class="hidden md:flex items-center space-x-4"></div>
-            <button id="mobile-menu-btn" class="md:hidden text-gray-700">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </nav>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden"></div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <!-- Main Content -->
     <main class="container mx-auto px-6 py-12">
@@ -46,7 +33,7 @@
         <p class="text-lg text-gray-600 mb-10 max-w-3xl">These items have been generously donated by your neighbors. Feel free to claim them if you are in need.</p>
 
         <!-- All donation items will be displayed in this grid -->
-        <div id="charity-items-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+        <div id="charity-items-grid" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
             <!-- Items will be dynamically inserted here by app.js -->
         </div>
     </main>
