@@ -1,6 +1,6 @@
-# 🏘️ Neighbour Share
+# 🏘️ Neighbor Share
 
-**Neighbour Share** is a community-first web app that empowers neighbors to connect, support, and share resources locally. Whether you want to **buy, sell, borrow, lend**, or **donate to charity**, this platform provides a simple, accessible interface to make it all happen — no backend required.
+**Neighbor Share** is a community-first web app that empowers neighbors to connect, support, and share resources locally. Whether you want to **buy, sell, borrow, lend**, or **donate to charity**, this platform provides a simple, accessible interface to make it all happen — no backend required.
 
 ---
 
@@ -24,7 +24,7 @@
 
 ## 🌐 Live Website
 
-🔗 [Visit Neighbour Share](https://neighbour-share.vercel.app/)
+🔗 [Visit Neighbour Share](https://neighbor-share-ten.vercel.app/)
 
 ---
 
